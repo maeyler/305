@@ -13,14 +13,17 @@
         max-width: 550px;
       }
       pre { overflow-x: auto; }
+      span { color: red; }
     </style>
 </head>
 
 <body>
 <h2 id=title></h2>
-
+<span>Cevapları Console'da deneyin</span>
 <div><h3>Q1</h3>
 <pre id=out1></pre>
+<span>'502' benim için de sürpriz oldu<br>
+Diğer makul cevapları kabul ettim</span>
 </div>
 
 <div><h3>Q2</h3>
@@ -65,7 +68,7 @@ a.sort((a,b) => a-b) // [2, 5, 7, 11, 23]
 </pre></div>
 
 <div><h3>Q6</h3>
-<pre id=out6>
+<pre id=out6>async/await:
   let r = await fetch(u); 
   let s = await r.clone().text(); 
   let x = await r.json()
@@ -80,7 +83,8 @@ coord = {lat:40.43, lon:29.16, time:1610975923, zone:3}  //Location
 w = {id:746, name:"Gemlik", temp:-2, coord, main:"Clear"}  //Object
 </pre>
 <img src="Q7 final.jpg" width="100%">
-b) instead of evt.pos, use prov.loc
+<span>class isimleri eksik, oklar sorunlu</span><br>
+<code>b) instead of evt.pos, use prov.loc</code>
 </div>
   
 <div id=out8><h3>Q8</h3>
@@ -92,7 +96,9 @@ b) instead of evt.pos, use prov.loc
       &lt;p>60 minutes&lt;/p>
     &lt;/div>
   &lt;/body>
-</pre></div>
+</pre>
+<span>Sayfanın nasıl göründüğü de sorulmuştu</span>
+</div>
 
 <script>
 "use strict";
@@ -106,9 +112,8 @@ class Point {
   constructor(x, y) {
     this.x = Number(x); this.y = Number(y)
     this.val = Math.sqrt(x*x + y*y)
-    this.str = '['+this.x+','+ this.y+']'
+    this.str = '['+x+','+y+']'
   }
-  //distance to [0,0]
   valueOf() { return this.val } 
   toString() { return this.str }
   static fromString(s) {
@@ -153,19 +158,17 @@ out4.innerText = Q4
 let a = [11, 23, 5, 2, 7]
 console.log('Q5 a =', a)
 
+//Q6
 let s, b
-function Q6() {
-  function testJSON(url) {
-    fetch(url).then(r => {
+function testJSON(u) {
+   fetch(u).then(r => {
       r.clone().text().then(t => s=t)
       r.json().then(x => b=x) //s, b global
-    })
-  }
-  testJSON('https://api.github.com/users/blm-fsmvu/repos')
-  return "testJSON called"
+   })
 }
-console.log('Q6', Q6())
-out6.innerText += '\n'+Q6
+testJSON('https://api.github.com/users/blm-fsmvu/repos')
+console.log('Q6 testJSON is called')
+out6.innerText += '\n'+testJSON
 
 //Q7
 let evt = {type:'click', id:16, pos:{lat:40.4321, lng:29.1648}} //Event
